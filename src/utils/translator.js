@@ -1,0 +1,10 @@
+﻿export const detectInputType = (sequence) => {
+    const dnaRegex = /^[ATCG]+$/i;
+    const rnaRegex = /^[AUCG]+$/i;
+    const proteinRegex = /^[ACDEFGHIKLMNPQRSTVWY-]+$/i;
+    const cleanedSeq = sequence.replace(/-/g, "");
+    if (dnaRegex.test(cleanedSeq)) return "DNA";
+    if (rnaRegex.test(cleanedSeq)) return "RNA";
+    if (proteinRegex.test(sequence)) return "Protein";
+    return "Unknown";
+};

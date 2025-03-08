@@ -8,3 +8,6 @@
     if (proteinRegex.test(sequence)) return "Protein";
     return "Unknown";
 };
+
+export const dnaToRna = (dna) => dna.toUpperCase().replace(/T/g, "U");
+export const rnaToDna = (rna) => rna.toUpperCase().replace(/U/g, "T");

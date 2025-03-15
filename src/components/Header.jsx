@@ -1,7 +1,10 @@
 ﻿const Header = () => {
     return (
       <header>
-        <h1>BioConvert</h1>
+        <div>
+          <img src="src/assets/bioconvertlogo.jpg" alt="Logo" style={{height: "24px"}} />
+          <h1>BioConvert</h1>
+        </div>
       </header>
     );
   };

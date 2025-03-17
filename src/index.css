@@ -1,10 +1,8 @@
-﻿:root {
-  --bg-color: rgb(0, 0, 0);
-  --primary-color: #8c76ff;
-  --secondary-color: #ffffff;
+﻿@import "tailwindcss";
+:root {
+  --primary-color: #0f172a;
+  --secondary-color: #f8fafc;
 }
 body {
-    background-color: var(--bg-color);
-    margin: 0;
-    font-family: Arial, sans-serif;
+  background-color: #e5e7eb;
 }

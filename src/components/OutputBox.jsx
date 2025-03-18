@@ -2,15 +2,17 @@ import { Box, Paper, Typography, Button } from "@mui/material";
 
 const OutputBox = ({ result, input, conversionType }) => {
     const handleCopy = () => {
-        navigator.clipboard.writeText(result);
-        alert("Copied to clipboard!");
+        if (result) {
+            navigator.clipboard.writeText(result);
+            alert("Copied to clipboard!");
+        }
     };
 
     const handleDownload = () => {
+        if (!result) return; // Don't proceed if there's no result
+
         // Format the content to be downloaded
         const fileContent = `
-Input Sequence: ${input || "No input provided"}
-Conversion Type: ${conversionType || "No conversion selected"}
 Output: ${result || "No output yet"}
         `;
 
@@ -20,20 +22,22 @@ Output: ${result || "No output yet"}
         element.download = "sequence_output.txt";
         document.body.appendChild(element);
         element.click();
+        document.body.removeChild(element); // Clean up the DOM
     };
 
     return (
         <Paper
             elevation={3}
             sx={{
-                padding: { xs: 1, sm: 2 }, // Adjust padding for smaller devices
+                padding: { xs: 1, sm: 2 },
                 width: "100%",
-                maxHeight: "50vh", // Ensures the box has a minimum height on all devices
+                maxHeight: { xs: "40vh", sm: "50vh" },
                 textAlign: "center",
                 borderRadius: "10px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                overflow: "hidden",
             }}
         >
             <Box
@@ -43,7 +47,7 @@ Output: ${result || "No output yet"}
                     borderRadius: "8px",
                     color: "var(--secondary-color)",
                     fontWeight: "bold",
-                    fontSize: { xs: "1rem", sm: "1.2rem" }, // Adjust font size for small screens
+                    fontSize: { xs: "1rem", sm: "1.2rem" }, // Adjust font size for mobile
                 }}
             >
                 Output
@@ -55,8 +59,9 @@ Output: ${result || "No output yet"}
                     padding: 2,
                     minHeight: "9rem",
                     borderRadius: "8px",
-                    fontSize: { xs: "0.9rem", sm: "1rem" }, // Adjust font size for small screens
-                    overflowWrap: "break-word", // Prevent overflow on smaller screens
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
+                    overflowWrap: "break-word",
+                    wordBreak: "break-word",
                 }}
             >
                 {result || "No output yet"}
@@ -66,7 +71,7 @@ Output: ${result || "No output yet"}
                     display: "flex",
                     justifyContent: "center",
                     gap: 1,
-                    flexDirection: { xs: "column", sm: "row" }, // Stack buttons on smaller screens
+                    flexDirection: { xs: "column", sm: "row" },
                     alignItems: "center",
                 }}
             >
@@ -80,7 +85,7 @@ Output: ${result || "No output yet"}
                         padding: "6px 12px",
                         fontWeight: "bold",
                         fontSize: "0.85rem",
-                        width: { xs: "100%", sm: "150px" }, // Full width on small screens, fixed width on larger screens
+                        width: { xs: "100%", sm: "150px" },
                         "&:hover": {
                             bgcolor: "var(--primary-color)",
                         },
@@ -104,7 +109,7 @@ Output: ${result || "No output yet"}
                         padding: "6px 12px",
                         fontWeight: "bold",
                         fontSize: "0.85rem",
-                        width: { xs: "100%", sm: "150px" }, // Full width on small screens, fixed width on larger screens
+                        width: { xs: "100%", sm: "150px" },
                         "&:hover": {
                             bgcolor: "var(--primary-color)",
                         },

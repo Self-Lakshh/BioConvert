@@ -3,15 +3,23 @@ import { AppBar, Toolbar, Typography, Box } from "@mui/material";
 const Header = () => {
     return (
         <AppBar position="static" sx={{ bgcolor: "var(--primary-color)" }}>
-            <Toolbar>
+            <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <Box
                     component="img"
-                    src="/logo.png" // Replace with your actual logo path
+                    src="src\assets\bioconvertlogo.jpg"
                     alt="Logo"
-                    sx={{ height: "2rem", marginRight: "0.5rem" }}
+                    sx={{ height: { xs: "1.5rem", sm: "2rem" }, marginRight: "0.5rem" }}
                 />
-                <Typography variant="h6" sx={{ flexGrow: 1, color: "var(--secondary-color)" }}>
-                    Protein DNA RNA Translator App
+                <Typography
+                    variant="h5"
+                    sx={{
+                        flexGrow: 1,
+                        color: "var(--secondary-color)",
+                        fontWeight: "bold",
+                        fontSize: { xs: "1.2rem", sm: "1.5rem" }, // Adjust font size on smaller screens
+                    }}
+                >
+                    BioConvert
                 </Typography>
             </Toolbar>
         </AppBar>

@@ -51,8 +51,30 @@ const InputBox = ({ setResult }) => {
     };
 
     return (
-        <Paper elevation={3} sx={{ padding: 2, width: "100%", height: "50vh", textAlign: "center", borderRadius: "10px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-            <Box sx={{ bgcolor: "var(--primary-color)", padding: 1, borderRadius: "8px", color: "var(--secondary-color)", fontWeight: "bold", fontSize: "1.2rem" }}>
+        <Paper
+            elevation={3}
+            sx={{
+                padding: 2,
+                width: "100%",
+                maxHeight: "50vh",
+                textAlign: "center",
+                borderRadius: "10px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                overflow: "hidden",
+            }}
+        >
+            <Box
+                sx={{
+                    bgcolor: "var(--primary-color)",
+                    padding: 1,
+                    borderRadius: "8px",
+                    color: "var(--secondary-color)",
+                    fontWeight: "bold",
+                    fontSize: { xs: "1rem", sm: "1.2rem" }, // Adjust font size for mobile
+                }}
+            >
                 Conversion Input
             </Box>
 
@@ -64,8 +86,8 @@ const InputBox = ({ setResult }) => {
                     onChange={handleInputChange}
                     sx={{
                         borderRadius: "8px",
-                        fontSize: "1rem", // Increased font size
-                        padding: "10px"  // Increase input padding
+                        fontSize: "1rem", // Adjust font size for better readability
+                        padding: "10px",  // Adjust padding for better UX on mobile
                     }}
                 />
                 <TextField
@@ -75,8 +97,8 @@ const InputBox = ({ setResult }) => {
                     onChange={(e) => setConversionType(e.target.value)}
                     sx={{
                         borderRadius: "8px",
-                        fontSize: "1rem", // Increased font size
-                        padding: "10px"  // Increase input padding
+                        fontSize: "1rem",
+                        padding: "10px",
                     }}
                     disabled={!conversionOptions[inputType]}
                 >
@@ -88,14 +110,15 @@ const InputBox = ({ setResult }) => {
 
             <Button
                 variant="contained"
-                size="small" // Button size
+                size="small"
                 sx={{
                     bgcolor: "#9b84e5",
                     color: "white",
                     borderRadius: "8px",
-                    padding: "6px 12px", // Smaller padding for button
+                    padding: "6px 12px",
                     fontWeight: "bold",
-                    fontSize: "0.85rem", // Smaller font size for button
+                    fontSize: "0.85rem",
+                    width: "100%", // Make button full-width for mobile
                     "&:hover": {
                         bgcolor: "var(--primary-color)"
                     },

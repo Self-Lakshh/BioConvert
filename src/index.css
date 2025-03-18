@@ -1,8 +1,10 @@
-﻿@import "tailwindcss";
-:root {
-  --primary-color: #0f172a;
-  --secondary-color: #f8fafc;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0f172a;   /* Slate-900 */
+  --color-secondary: #f8fafc; /* Slate-50 */
 }
+
 body {
   background-color: #e5e7eb;
 }

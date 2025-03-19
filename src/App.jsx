@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Container, Grid, Box } from "@mui/material";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import InputBox from "./components/InputBox";
@@ -9,20 +8,22 @@ const App = () => {
   const [result, setResult] = useState("");
 
   return (
-    <Box>
-      <Header />
-      <Container sx={{ mt: 4, mb: 4, maxWidth: "100vw" }}>
-        <Grid container spacing={3} sx={{ height: "65vh" }}>
-          <Grid item xs={12} md={6} sx={{ display: "flex" }}>
-            <InputBox setResult={setResult} />
-          </Grid>
-          <Grid item xs={12} md={6} sx={{ display: "flex" }}>
-            <OutputBox result={result} />
-          </Grid>
-        </Grid>
-      </Container>
-      <Footer />
-    </Box>
+    <div className="min-h-screen flex flex-col">
+      <div className="hidden md:block">
+        <Header />
+      </div>
+
+      <main className="flex-1 container mx-auto py-5 px-4">
+        <div className="flex flex-col gap-6 md:flex-row">
+          <InputBox setResult={setResult} />
+          <OutputBox result={result} />
+        </div>
+      </main>
+
+      <div className="hidden md:block">
+        <Footer />
+      </div>
+    </div>
   );
 };
 

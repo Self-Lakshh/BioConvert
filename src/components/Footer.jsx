@@ -1,30 +1,12 @@
-import { Box, Typography } from "@mui/material";
-
 const Footer = () => {
     return (
-        <Box
-            sx={{
-                position: "fixed",
-                bottom: 0,
-                left: 0,
-                width: "100%",
-                bgcolor: "var(--primary-color)",
-                color: "var(--secondary-color)",
-                textAlign: "center",
-                py: { xs: 1, sm: 2 },
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                boxSizing: "border-box",
-                fontSize: { xs: "0.8rem", sm: "1rem" }, // Adjust font size for mobile
-                zIndex: 1000, // Ensure it stays above other content
-            }}
-        >
-            <Typography variant="h6">
-                Made By - Lakshya Chopra (23CS002830) and Riya (23CS002792)
-            </Typography>
-        </Box>
+      <footer className="fixed bg-gray-100 bottom-0 left-0 w-full bg-primary text-secondary text-center py-2 sm:py-3 z-50">
+        <p className="text-sm sm:text-base font-medium">
+          Made By - Lakshya Chopra (23CS002830) and Riya (23CS002792)
+        </p>
+      </footer>
     );
-};
-
-export default Footer;
+  };
+  
+  export default Footer;
+  

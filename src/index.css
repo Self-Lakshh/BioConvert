@@ -1,12 +1,10 @@
+@import "tailwindcss";
+
 :root {
-  --bg-color: rgb(0, 0, 0);
-  --primary-color: #8c76ff;
-  --secondary-color: #ffffff;
+  --primary-color: #0f172a;   /* Slate-900 */
+  --secondary-color: #f8fafc; /* Slate-50 */
 }
 
 body {
-    background-color: var(--bg-color);
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+  background-color: #e5e7eb;
 }

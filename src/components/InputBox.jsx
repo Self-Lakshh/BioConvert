@@ -1,139 +1,109 @@
 import { useState, useEffect } from "react";
-import { Box, TextField, MenuItem, Button, Paper } from "@mui/material";
-import { detectInputType, dnaToRna, dnaToProtein, rnaToDna, rnaToProtein, proteinToDna, proteinToRna } from "../utils/translator";
+import {
+  detectInputType,
+  dnaToRna,
+  dnaToProtein,
+  rnaToDna,
+  rnaToProtein,
+  proteinToDna,
+  proteinToRna,
+} from "../utils/translator";
 
 const conversionOptions = {
-    DNA: [
-        { value: "dnaToRna", label: "DNA → RNA" },
-        { value: "dnaToProtein", label: "DNA → Protein" }
-    ],
-    RNA: [
-        { value: "rnaToDna", label: "RNA → DNA" },
-        { value: "rnaToProtein", label: "RNA → Protein" }
-    ],
-    Protein: [
-        { value: "proteinToDna", label: "Protein → DNA" },
-        { value: "proteinToRna", label: "Protein → RNA" }
-    ]
+  DNA: [
+    { value: "dnaToRna", label: "DNA → RNA" },
+    { value: "dnaToProtein", label: "DNA → Protein" },
+  ],
+  RNA: [
+    { value: "rnaToDna", label: "RNA → DNA" },
+    { value: "rnaToProtein", label: "RNA → Protein" },
+  ],
+  Protein: [
+    { value: "proteinToDna", label: "Protein → DNA" },
+    { value: "proteinToRna", label: "Protein → RNA" },
+  ],
 };
 
 const conversionFunctions = {
-    dnaToRna,
-    dnaToProtein,
-    rnaToDna,
-    rnaToProtein,
-    proteinToDna,
-    proteinToRna
+  dnaToRna,
+  dnaToProtein,
+  rnaToDna,
+  rnaToProtein,
+  proteinToDna,
+  proteinToRna,
 };
 
 const InputBox = ({ setResult }) => {
-    const [input, setInput] = useState("");
-    const [inputType, setInputType] = useState("Unknown");
-    const [conversionType, setConversionType] = useState("");
+  const [input, setInput] = useState("");
+  const [inputType, setInputType] = useState("Unknown");
+  const [conversionType, setConversionType] = useState("");
 
-    useEffect(() => {
-        if (conversionOptions[inputType]) {
-            setConversionType(conversionOptions[inputType][0].value);
-        } else {
-            setConversionType("");
-        }
-    }, [inputType]);
+  useEffect(() => {
+    if (conversionOptions[inputType]) {
+      setConversionType(conversionOptions[inputType][0].value);
+    } else {
+      setConversionType("");
+    }
+  }, [inputType]);
 
-    const handleInputChange = (e) => {
-        const value = e.target.value.toUpperCase();
-        setInput(value);
-        setInputType(detectInputType(value));
-    };
+  const handleInputChange = (e) => {
+    const value = e.target.value.toUpperCase();
+    setInput(value);
+    setInputType(detectInputType(value));
+  };
 
-    const handleConvert = () => {
-        const conversionFunction = conversionFunctions[conversionType];
-        setResult(conversionFunction ? conversionFunction(input) : "Invalid conversion");
-    };
+  const handleConvert = () => {
+    const conversionFunction = conversionFunctions[conversionType];
+    setResult(conversionFunction ? conversionFunction(input) : "Invalid conversion");
+  };
 
-    return (
-        <Paper
-            elevation={3}
-            sx={{
-                padding: 2,
-                width: "100%",
-                maxHeight: "50vh",
-                textAlign: "center",
-                borderRadius: "10px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                overflow: "hidden",
-            }}
-        >
-            <Box
-                sx={{
-                    bgcolor: "var(--primary-color)",
-                    padding: 1,
-                    borderRadius: "8px",
-                    color: "var(--secondary-color)",
-                    fontWeight: "bold",
-                    fontSize: { xs: "1rem", sm: "1.2rem" }, // Adjust font size for mobile
-                }}
-            >
-                Conversion Input
-            </Box>
+  return (
+    <div className="bg-white shadow-md rounded-lg p-4 w-full max-h-[50vh] flex flex-col justify-between space-y-4 overflow-hidden">
+      {/* Title */}
+      <div className="bg-primary text-secondary font-semibold text-lg sm:text-xl rounded-md py-1 text-center">
+        Conversion Input
+      </div>
 
-            <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 2 }}>
-                <TextField
-                    label="Enter Sequence"
-                    variant="outlined"
-                    value={input}
-                    onChange={handleInputChange}
-                    sx={{
-                        borderRadius: "8px",
-                        fontSize: "1rem", // Adjust font size for better readability
-                        padding: "10px",  // Adjust padding for better UX on mobile
-                    }}
-                />
-                <TextField
-                    select
-                    label="Convert To"
-                    value={conversionType}
-                    onChange={(e) => setConversionType(e.target.value)}
-                    sx={{
-                        borderRadius: "8px",
-                        fontSize: "1rem",
-                        padding: "10px",
-                    }}
-                    disabled={!conversionOptions[inputType]}
-                >
-                    {conversionOptions[inputType]?.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
-                    ))}
-                </TextField>
-            </Box>
+      {/* Input fields */}
+      <div className="flex flex-col gap-4">
+        <div>
+          <label className="block text-sm font-medium mb-1">Enter Sequence</label>
+          <input
+            type="text"
+            value={input}
+            onChange={handleInputChange}
+            placeholder="e.g. ATGCGT..."
+            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm sm:text-base"
+          />
+        </div>
 
-            <Button
-                variant="contained"
-                size="small"
-                sx={{
-                    bgcolor: "#9b84e5",
-                    color: "white",
-                    borderRadius: "8px",
-                    padding: "6px 12px",
-                    fontWeight: "bold",
-                    fontSize: "0.85rem",
-                    width: "100%", // Make button full-width for mobile
-                    "&:hover": {
-                        bgcolor: "var(--primary-color)"
-                    },
-                    "&:disabled": {
-                        bgcolor: "var(--primary-color)",
-                        color: "white"
-                    }
-                }}
-                onClick={handleConvert}
-                disabled={!conversionType}
-            >
-                Translate
-            </Button>
-        </Paper>
-    );
+        <div>
+          <label className="block text-sm font-medium mb-1">Convert To</label>
+          <select
+            value={conversionType}
+            onChange={(e) => setConversionType(e.target.value)}
+            disabled={!conversionOptions[inputType]}
+            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm sm:text-base disabled:opacity-60"
+          >
+            {conversionOptions[inputType]?.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* Convert Button */}
+      <button
+        onClick={handleConvert}
+        disabled={!conversionType}
+        className="w-full bg-violet-500 hover:bg-primary text-white font-bold py-2 px-4 rounded-md text-sm sm:text-base transition-colors disabled:bg-primary disabled:text-white disabled:opacity-80"
+      >
+        Translate
+      </button>
+    </div>
+  );
 };
 
 export default InputBox;
